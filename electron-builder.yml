@@ -1,0 +1,7 @@
+appId: com.corporate.AppName
+publish:
+  provider: github
+  token: c99d27ba417f4c2b715f397a7d77fe238db35f13
+  host: github.corporate.com
+  owner: LordKai182
+  repo: https://github.com/LordKai182/vuedesktop.git

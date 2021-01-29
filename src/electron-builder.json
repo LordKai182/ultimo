@@ -1,0 +1,25 @@
+{
+    "productName": "myApp",
+    "appId": "com.myApp",
+    "asar": true,
+    "protocols": {
+        "name": "myApp",
+        "schemes": [
+            "myApp"
+        ]
+    },
+    "mac": {
+        "target": [
+            "default"
+        ]
+    },
+    "win": {
+        "target": [
+            "portable"
+        ]
+    },
+    "portable": {
+        "artifactName": "myApp.exe"
+    },
+    "extends": null
+}
