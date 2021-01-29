@@ -20,7 +20,7 @@
       end-placeholder="Fim">
     </el-date-picker>
  
-<el-collapse v-model="activeNames">
+<el-collapse v-model="activeNames" accordion="true">
   <el-collapse-item title="Faturamento" name="1">
     <el-row :gutter="12">
  
@@ -37,8 +37,8 @@
     <el-switch
   v-model="value2"
    @change="decisaoDash();"
-   active-color="#13ce66"
-  inactive-color="#ff4949"
+   inactive-color="#13ce66"
+  active-color="#ff4949"
   active-text="Pagamentos"
   inactive-text="Recebimentos">
 </el-switch>
@@ -76,32 +76,41 @@
     <div>Definite and clear: enunciate your intentions clearly so that the users can quickly understand and make decisions;</div>
     <div>Easy to identify: the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.</div>
   </el-collapse-item>
-  <el-collapse-item title="Mais Uma Aba" name="4">
-    <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
-    <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
-  </el-collapse-item>
 </el-collapse>
 
 
 <p></p>
  <el-row :gutter="10">
   <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
-  <div class="grid-content bg-purple-light seta">
-  <i class="el-icon-arrow-right" style="font-size:2.99em !important;font-weight:bold;"></i>
-  </div>
-  </el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="11" :xl="11">
-  <div class="grid-content bg-purple seta">
   
+  <div class="grid-content bg-purple-light seta">
+  <i class="el-icon-arrow-right" style="font-size:2.99em !important;font-weight:bold;color:#F45B08"></i>
+  </div>
+ 
+  
+  
+  </el-col>
+  <el-col :xs="4" :sm="6" :md="8" :lg="11" :xl="11">
+  <div class="grid-content bg-purple seta">
+   <p style="font-size:1.50em !important;font-weight:bold;margin-right:20px;color:#3C3B3A;">Titulos Vencendo Hoje (A Pagar)</p>
+   <div>
+     <el-progress type="circle" width="90" :percentage="10" color="#F45B08"  :format="format"></el-progress>
+
+  </div>
   </div>
   </el-col>
   <el-col :xs="4" :sm="6" :md="8" :lg="11" :xl="11">
   <div class="grid-content bg-purple seta">
+   <p style="font-size:1.50em !important;font-weight:bold;margin-right:20px;color:#3C3B3A;">Titulos Vencendo Hoje (A Receber)</p>
+   <div>
+     <el-progress type="circle" width="90" :percentage="10" color="#789B4C"  :format="format"></el-progress>
+
+  </div>
   </div>
   </el-col>
   <el-col :xs="2" :sm="2" :md="2" :lg="1" :xl="1">
   <div class="grid-content bg-purple-light seta">
-  <i class="el-icon-arrow-left" style="font-size:2.99em !important;font-weight:bold;"></i>
+  <i class="el-icon-arrow-left" style="font-size:2.99em !important;font-weight:bold;color:#789B4C"></i>
   </div>
   </el-col>
 </el-row>
@@ -375,6 +384,9 @@ export default Vue.extend({
       }
       },
       methods: {
+         format(percentage) {
+           return percentage;
+      },
         decisaoDash(){
           this.loading = true;
           if(this.value2 == false){

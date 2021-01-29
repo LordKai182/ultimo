@@ -1,6 +1,11 @@
 <template>
 <div>
-<el-row :gutter="12">
+<el-collapse>
+  <el-collapse-item  name="3">
+  <template slot="title">
+      Opções e Filtros <i style="margin-left:10px;color:#3598F6;" class="header-icon el-icon-info"></i>
+    </template>
+   <el-row :gutter="12">
   <el-col :xl="12">
   <div>
   <el-radio-group @change="FiltarContas" class="groupradio" v-model="radio">
@@ -23,12 +28,11 @@
     </div>
   </el-col>
  </el-row>
- <el-row :gutter="12">
+ 
+  </el-collapse-item>
+</el-collapse>
 
-  <el-col :xl="12">
-  </el-col>
-
- </el-row>
+ 
  <p></p>
  <el-row :gutter="12">
   <el-col :xl="12">
@@ -37,7 +41,7 @@
      :v-loading="loading"
     :data="tableData"
     style="width: 100%"
-    height="450"
+    height="500"
     :lazy="true"
     >
     <el-table-column

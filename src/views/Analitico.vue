@@ -1,6 +1,11 @@
 <template>
 <div>
-<el-row :gutter="12">
+<el-collapse>
+ <el-collapse-item name="3">
+  <template slot="title">
+      Opções e Filtros <i style="margin-left:10px;color:#3598F6;" class="header-icon el-icon-info"></i>
+    </template>
+   <el-row :gutter="12">
   <el-col :xl="12">
   <div>
   <el-radio-group @change="handleCurrentChange(1)" class="groupradio" v-model="radio">
@@ -19,7 +24,7 @@
        format="dd/MM/yyyy"
       end-placeholder="Data final">
     </el-date-picker>
-    <el-button style="margin-left:10px;" @click="handleCurrentChange(1)" type="primary">Bang!!</el-button>
+    
   
   </div>
   </el-col>
@@ -52,6 +57,30 @@
   </el-col>
 
  </el-row>
+   <el-row :gutter="12">
+<p></p>
+  <el-col :xl="12">
+<div class="block">
+ <span class="demonstration" style="margin-left:50px;">Filtro</span>
+ <el-select v-model="filtroValor" class="el-select-3"  placeholder="Selecione uma opção">
+    <el-option
+      v-for="item in filtro"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+<el-input placeholder="Valor a Filtrar" class="inp" v-model="fornecedor.codigo"></el-input>
+<el-button style="margin-left:10px;" @click="handleCurrentChange(1)" type="primary">Bang!!</el-button>
+</div>
+
+    </el-col>
+
+ </el-row>
+  </el-collapse-item>
+</el-collapse>
+
+
  <p></p>
  <el-row :gutter="12">
   <el-col :xl="12">
@@ -60,7 +89,7 @@
      :v-loading="loading"
     :data="tableData"
     style="width: 100%;"
-    height="450"
+    height="500"
     :lazy="true"
     >
     <el-table-column
@@ -178,6 +207,15 @@ export default Vue.extend({ name: 'ContasPagar',
          codigo:'',
          nome:''
        },
+       filtroValor: '',
+       filtro:[
+          {value:'nada', label:'Sem Filtro'},
+         {value:'codigoFornecedor', label:'Código do Fronecedor'},
+         {value:'codigoLanct', label:'Nº Lançamento'},
+          {value:'nomeFornecedor', label:'Nome do Fronecedor'},
+           {value:'numeroDocto', label:'Número do Documento'},
+            {value:'tipoDocto', label:'Tipo do Documento'}
+       ],
        empresas:'',
        loading: false,
        competencia: '',
@@ -278,6 +316,12 @@ export default Vue.extend({ name: 'ContasPagar',
 .inp{
   width:150px!important ;
   margin-left:10px;
+}
+.el-select-3 {
+  width: 18.5%!important;
+  margin-right:10px;
+  margin-left:10px;
+  margin-bottom:10px;
 }
 .el-select-2 {
   width: 20.5%!important;

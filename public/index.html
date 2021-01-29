@@ -22,7 +22,7 @@
     <!-- built files will be auto injected -->
     <div id="notification" class="hidden">
         <p id="message"></p>
-        <button id="close-button" onClick="closeNotification()">
+        <button id="close-button" style="margin-right: 20px;" onClick="closeNotification()">
         Close
       </button>
         <button id="restart-button" onClick="restartApp()" class="hidden">
@@ -33,6 +33,10 @@
 
 </html>
 <style>
+    .hidden {
+        display: none;
+    }
+    
     #notification {
         position: fixed;
         bottom: 20px;
@@ -42,10 +46,6 @@
         border-radius: 5px;
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-    
-    .hidden {
-        display: none;
     }
 </style>
 <script>

@@ -20,10 +20,11 @@ module.exports = {
                 publish: [{
                     provider: "github",
                     owner: "LordKai182",
-                    repo: "https://github.com/LordKai182/vuedesktop.git",
+                    repo: "https://github.com/LordKai182/ultimo.git",
                     token: "c99d27ba417f4c2b715f397a7d77fe238db35f13",
                     releaseType: "draft",
                     channel: "latest",
+                    protocol: "https",
                     url: "cinecoqui.chrismichael.now.sh"
                 }]
             }

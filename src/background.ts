@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain  } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, dialog  } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment =  false; //process.env.NODE_ENV !== 'production'
@@ -14,8 +14,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    show:false,
     title: "My App",
     titleBarStyle: 'hidden',
     webPreferences: {
@@ -24,6 +23,9 @@ async function createWindow() {
       nodeIntegration: true,
     }
   })
+  win.maximize();
+win.show();
+
   win.setMenu(null)
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -38,12 +40,31 @@ async function createWindow() {
     autoUpdater.checkForUpdatesAndNotify();
   });
 
+  autoUpdater.setFeedURL({ "provider": "generic", "url":'http://127.0.0.1:8097/'});
+
+  win.webContents.once("did-frame-finish-load", function(event) {
+    //dialog.showMessageBox(win, {title: "autoUpdater", message: 'checking for updates....'});
+    autoUpdater.setFeedURL('http://127.0.0.1:8097/'); // throws error
+    autoUpdater.checkForUpdates();
+  })
+  
+ /*  autoUpdater.setFeedURL({
+    provider: 'github',
+    repo: "https://github.com/LordKai182/vuedesktop.git",
+    token: "c99d27ba417f4c2b715f397a7d77fe238db35f13",
+    owner: "LordKai182",
+    private: false,
+    
+  }); */
+  autoUpdater.checkForUpdates();
+
   autoUpdater.on('update-available', () => {
     win.webContents.send('update_available');
   });
   autoUpdater.on('update-downloaded', () => {
     win.webContents.send('update_downloaded');
   });
+ 
 }
 
 // Quit when all windows are closed.
@@ -82,17 +103,9 @@ app.on('ready', async () => {
   }
   createWindow()
 })
-if (process.env.NODE_ENV !== 'development') {
-  autoUpdater.setFeedURL({
-    provider: 'github',
-    repo: "https://github.com/LordKai182/vuedesktop.git",
-    token: "c99d27ba417f4c2b715f397a7d77fe238db35f13",
-    owner: "LordKai182",
-    private: true,
-    
-  });
-  autoUpdater.checkForUpdates();
-}
+
+
+
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
