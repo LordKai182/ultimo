@@ -1,46 +1,22 @@
-name: Build <App name>
-
+name: Release
 on:
   release:
     types:
-      - published
+      - created
 
 jobs:
 
-  build:
-    name: Build <App name>
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
+ 
+  publish_on_win:
+    runs-on: windows-latest
     steps:
-
-      - uses: actions/checkout@v2
-
-      - name: Setup NodeJs
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build
-        run: yarn export
-
-      - name: Upload builds to release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref }}
-          files: out/*.*
-          draft: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-      - name: Upload Nightly Build
-        uses: actions/upload-artifact@v2
-        if: success()
-        with:
-          name: <App name>-nightly
-          path: out/**/*!(.zip)
+    - uses: actions/checkout@v2       
+    - uses: actions/setup-node@master
+      with:
+        node-version: 14
+    - name: install dependencies
+      run: npm install
+    - name: publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npm run publish
