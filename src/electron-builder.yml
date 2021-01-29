@@ -5,4 +5,5 @@ publish:
   host: github.corporate.com
   owner: LordKai182
   repo: https://github.com/LordKai182/ultimo.git
+  
   protocol: "https"

@@ -7,7 +7,7 @@
     "scripts": {
         "gh-publish": "vue-cli-service electron: build -p always",
         "build": "electron-builder build  --win --publish never",
-        "deploy": "vue-cli-service electron:build --win --publish always",
+        "publish": "vue-cli-service electron:build --win --publish always",
         "serve": "vue-cli-service serve",
         "lint": "vue-cli-service lint",
         "electron:build": "vue-cli-service electron:build",
