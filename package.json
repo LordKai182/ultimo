@@ -4,6 +4,19 @@
     "private": true,
     "author": "henrique",
     "description": "sagDesktop",
+    "config": {
+        "forge": {
+            "publishers": [{
+                "name": "@electron-forge/publisher-github",
+                "config": {
+                    "repository": {
+                        "owner": "LordKai182",
+                        "name": "ultimo"
+                    }
+                }
+            }]
+        }
+    },
     "publish": [{
         "provider": "github",
         "owner": "LordKai182",
