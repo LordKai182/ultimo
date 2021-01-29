@@ -18,6 +18,7 @@
         }
     },
     "publish": [{
+
         "provider": "github",
         "owner": "LordKai182",
         "repo": "https://github.com/LordKai182/ultimo.git",
